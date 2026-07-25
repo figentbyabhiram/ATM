@@ -190,10 +190,7 @@ public class Main5 {
                     displayMainMenu();
                 }
             }
-            catch(Exception e){
-                e.printStackTrace();
-            }
-      // scan.close();
+            scan.close();
         }
     }
     public  static void clearConsol()
