@@ -11,16 +11,21 @@ public class Registration {
     static String accno;
 
     public  static void createAccount(String Name, String aadhaar,String email, String phno, String pan) throws IOException {
-        int min = 1000000;
-        int max = 9999999;
-        int randomNumber;
-        
+        // Use SecureRandom for cryptographically strong and unique account numbers
+        SecureRandom secureRandom = new SecureRandom();
+        final int MIN_ACC_NO = 1_000_000;
+        final int MAX_ACC_NO = 9_999_999;
         File accountDir;
+        int attempts = 0;
         do {
-            randomNumber = (int) (Math.random() * (max - min + 1) + min);
-            accno = randomNumber + "";
+            int randomNumber = secureRandom.nextInt((MAX_ACC_NO - MIN_ACC_NO) + 1) + MIN_ACC_NO;
+            accno = Integer.toString(randomNumber);
             accountDir = new File("./ACCOUNTS/" + accno);
-        } while (accountDir.exists());
+            attempts++;
+        } while (accountDir.exists() && attempts < 1000);
+        if (accountDir.exists()) {
+            throw new IOException("Unable to generate unique account number after many attempts");
+        }
 
 
         if (accountDir.mkdirs()) {
