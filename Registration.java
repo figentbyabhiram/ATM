@@ -24,13 +24,15 @@ public class Registration {
 
 
         if (accountDir.mkdirs()) {
-            File f=new File("./ACCOUNTS/"+accno+"/Details.csv");
-            f.createNewFile();
-            File f1=new File("./ACCOUNTS/"+accno+"/Balance.csv");
-            f1.createNewFile();
-            File f2=new File("./ACCOUNTS/"+accno+"/TransactionList.csv");
-            f2.createNewFile();
-            try (FileWriter writer = new FileWriter("./ACCOUNTS/"+accno+"/Balance.csv")) {
+            Path accountPath = java.nio.file.Paths.get("ACCOUNTS", accno);
+            java.nio.file.Files.createDirectories(accountPath);
+            java.nio.file.Path detailsPath = accountPath.resolve("Details.csv");
+            java.nio.file.Path balancePath = accountPath.resolve("Balance.csv");
+            java.nio.file.Path transactionPath = accountPath.resolve("TransactionList.csv");
+            java.nio.file.Files.createFile(detailsPath);
+            java.nio.file.Files.createFile(balancePath);
+            java.nio.file.Files.createFile(transactionPath);
+            try (java.io.BufferedWriter writer = java.nio.file.Files.newBufferedWriter(balancePath)) {
                 writer.write("0");
                 writer.close();
             } catch (IOException e) {
