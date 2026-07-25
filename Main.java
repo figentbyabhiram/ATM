@@ -25,7 +25,7 @@ public class Main5 {
                             System.out.println("or Password");
                            }
                     } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        handleIOException(e);
                     }
                     break;
                 case 2:
