@@ -141,12 +141,7 @@ public class Main5 {
                     }
                     break;
                 case 4:
-                     try{
-                        User.Transfer();
-                     }
-                     catch(IOException e){
-                        e.printStackTrace();
-                     }
+                     handleIOException(() -> User.transfer());
                      break;
                 case 5:
                       try{
