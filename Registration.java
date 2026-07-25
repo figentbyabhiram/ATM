@@ -48,20 +48,26 @@ public class Registration {
         }
     }
     
-    public static void setPin(String pin) throws IOException{
-        File accountDir;
-        accountDir = new File("./PASSWORDS/" + accno);
-        if (accountDir.mkdirs()) {
-            File f=new File("./PASSWORDS/"+accno+"/Pass.csv");
-            f.createNewFile();
-            try (FileWriter writer = new FileWriter("./PASSWORDS/"+accno+"/Pass.csv")) {
-            writer.write(Hash.hashPassword(pin));
-            System.out.println("Pin set successfully.");
-            writer.close();
-        } catch (IOException e) {
-            System.err.println("An error occurred while writing to the file: " + e.getMessage());
+    public static void setPin(String account, String pin) throws IOException {
+        if (account == null) {
+            throw new IllegalArgumentException("Account number cannot be null");
         }
-        } else {
+        Path accountDir = Paths.get("./PASSWORDS", account);
+        Files.createDirectories(accountDir);
+        Path pinFile = accountDir.resolve("Pass.csv");
+        // Write hashed PIN with buffering
+        try (BufferedWriter writer = Files.newBufferedWriter(pinFile,
+                StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
+            writer.write(Hash.hashPassword(pin));
+        }
+        // Restrict file permissions to owner only (if supported)
+        try {
+            Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-------");
+            Files.setPosixFilePermissions(pinFile, perms);
+        } catch (UnsupportedOperationException ignored) {
+        }
+        System.out.println("Pin set successfully.");
+    }
             System.out.println("Failed to create account directory.");
         }
 
