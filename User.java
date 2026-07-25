@@ -39,7 +39,11 @@ public class User {
         System.out.println("Enter the Amount: ");
         Scanner sc = new Scanner(System.in);
         double amount = sc.nextDouble();
-        sc.close();
+        // Do not close the Scanner that wraps System.in to avoid closing System.in
+        if (amount <= 0) {
+            System.out.println("Deposit amount must be positive.");
+            return;
+        }
         if (bal >= amount) {
             updateBalance(f, bal - amount);
             System.out.println("Collect your money.");
