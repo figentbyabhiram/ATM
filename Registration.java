@@ -3,14 +3,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Registration {
-    public static  String Name;
-    public static  String aadhaar;
-    public static  String email;
-    public static  String phno;
-    public static  String pan="";
-    static String accno;
+    // Removed unused static fields that exposed mutable global state
+    // If instance data is required, define private instance fields instead
 
-    public  static void createAccount(String Name, String aadhaar,String email, String phno, String pan) throws IOException {
+    public static void createAccount(String name, String aadhaar, String email, String phNo, String pan) throws IOException {
         int min = 1000000;
         int max = 9999999;
         int randomNumber;
