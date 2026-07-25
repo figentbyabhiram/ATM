@@ -116,13 +116,18 @@ public class Main5 {
       
             switch (choice) {
                 case 1:
-                try{ 
-                File f = new File("./ACCOUNTS/" + User.acc + "/balance.csv");
-                System.out.println("Your current balance is: " + User.getBalance(f));
-                }
-                 catch (IOException e) {
-                    e.printStackTrace();
-                    
+                try {
+                    // Validate account identifier to prevent path traversal
+                    if (!User.acc.matches("[A-Za-z0-9_]+")) {
+                        System.err.println("Invalid account identifier.");
+                        break;
+                    }
+                    java.nio.file.Path path = java.nio.file.Paths.get("ACCOUNTS", User.acc, "balance.csv");
+                    java.io.File f = path.toFile();
+                    String balance = User.getBalance(f);
+                    System.out.println("Your current balance is: " + balance);
+                } catch (IOException e) {
+                    System.err.println("Unable to retrieve balance.");
                 }
                     break;
                 case 2:
