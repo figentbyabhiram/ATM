@@ -16,9 +16,11 @@ public class Registration {
         int randomNumber;
         
         File accountDir;
+        String accno;
+        SecureRandom secureRandom = new SecureRandom();
         do {
-            randomNumber = (int) (Math.random() * (max - min + 1) + min);
-            accno = randomNumber + "";
+            randomNumber = secureRandom.nextInt((max - min) + 1) + min;
+            accno = Integer.toString(randomNumber);
             accountDir = new File("./ACCOUNTS/" + accno);
         } while (accountDir.exists());
 
