@@ -10,7 +10,7 @@ public class User {
         acc = sc.nextLine();  
         System.out.println("Enter password: ");
         pass = sc.nextLine();  
-        sc.close();
+        // sc.close(); // removed to keep System.in open
         String line = "";
         File f1 = new File("./ACCOUNTS/" + acc + "/Details.csv");
         File f2 = new File("./PASSWORDS/" + acc + "/Pass.csv");
