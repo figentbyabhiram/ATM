@@ -75,12 +75,7 @@ public class Main5 {
                 break;
                 default:
                     System.out.print("\n\t\tInvalid Choice!\n");
-                    try {
-                        System.out.print("\n\nPress any key to continue...");
-                        System.in.read();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    pauseForUser();
                     displayWelcomeScreen();
                 }
       // scan.close();
