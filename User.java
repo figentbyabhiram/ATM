@@ -2,15 +2,13 @@ import java.io.*;
 import java.util.Scanner;
 
 public class User {
-    static String acc;  
-    static String pass; 
     public static boolean signIn() throws FileNotFoundException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter your account number: ");
-        acc = sc.nextLine();  
+        String acc = sc.nextLine();  
         System.out.println("Enter password: ");
-        pass = sc.nextLine();  
-        sc.close();
+        String pass = sc.nextLine();  
+        // sc.close();
         String line = "";
         File f1 = new File("./ACCOUNTS/" + acc + "/Details.csv");
         File f2 = new File("./PASSWORDS/" + acc + "/Pass.csv");
