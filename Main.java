@@ -51,13 +51,11 @@ public class Main5 {
                     pan = scan.nextLine();
                 }
 
-                System.out.println("Set a Password for your Account: ");
-                String pass = scan.nextLine();
+                Console console = System.console();
+                char[] pass = (console != null) ? console.readPassword("Set a Password for your Account: ") : scan.nextLine().toCharArray();
+                char[] confirmPass = (console != null) ? console.readPassword("Confirm your Password: ") : scan.nextLine().toCharArray();
 
-                System.out.println("Confirm your Password: ");
-                String confirmPass = scan.nextLine();
-
-                if (pass.equals(confirmPass)) {
+                if (Arrays.equals(pass, confirmPass)) {
                     try {
                         Registration.createAccount(Name, aadhaar, email, phno, pan);
                     } catch (IOException e) {
