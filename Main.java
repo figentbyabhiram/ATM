@@ -109,9 +109,8 @@ public class Main5 {
                         "\t\t" + "|                               |" + "\n" +
                         "\t\t" + "|_______________________________|" + "\n");
         System.out.print("\n\t\tYour Choice: ");
-        try (Scanner scan = new Scanner(System.in)) {
-            try{ 
-            int choice = scan.nextInt();
+        try {
+            int choice = scanner.nextInt();
             
       
             switch (choice) {
