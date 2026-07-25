@@ -82,7 +82,7 @@ public class User {
             return;
         }
         System.out.println("Enter amount to transfer: ");
-        double transferAmount = sc.nextDouble();
+        double transferAmount = sc.nextDouble(); if (transferAmount <= 0) { System.out.println("Transfer amount must be positive."); sc.close(); return; }
         File currentUserFile = new File("./ACCOUNTS/" + acc + "/Balance.csv");
         double senderBalance = getBalance(currentUserFile);
         if (senderBalance >= transferAmount) {
