@@ -6,7 +6,7 @@ public class Hash {
     public static String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(password.getBytes());
+            byte[] hashedBytes = md.digest(password.getBytes(java.nio.charset.StandardCharsets.UTF_8));
             return Base64.getEncoder().encodeToString(hashedBytes);
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Error: Unable to find SHA-256 algorithm", e);
