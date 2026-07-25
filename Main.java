@@ -13,9 +13,9 @@ public class Main5 {
                         "\t\t" + "|                             |" + "\n" +
                         "\t\t" + "|_____________________________|" + "\n");
         System.out.print("\n\t\tYour Choice: ");
-        try (Scanner scan = new Scanner(System.in)) {
-            int choice = scan.nextInt();
-            switch (choice) {
+        Scanner scan = new Scanner(System.in);
+        int choice = scan.nextInt();
+        switch (choice) {
                 case 1:
                     try {
                         if(User.signIn()){
