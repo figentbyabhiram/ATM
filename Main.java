@@ -81,7 +81,7 @@ public class Main5 {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    displayWelcomeScreen();
+                    continue;
                 }
       // scan.close();
         }
