@@ -126,12 +126,7 @@ public class Main5 {
                 }
                     break;
                 case 2:
-                try{ 
-                  User.withdraw();
-                }
-                catch(IOException e){
-                    e.printStackTrace();
-                }
+                handleIOException(() -> User.withdraw());
                     break;
                 case 3:
                     try {
