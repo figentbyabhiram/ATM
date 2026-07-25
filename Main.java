@@ -25,7 +25,7 @@ public class Main5 {
                             System.out.println("or Password");
                            }
                     } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+                        System.err.println("Error reading input.");
                     }
                     break;
                 case 2:
