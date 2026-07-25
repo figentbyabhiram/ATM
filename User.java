@@ -71,11 +71,25 @@ public class User {
         bw.close();
     }
 
-    public static void Transfer() throws IOException {
+    public static void transfer() throws IOException {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter recipient account number: ");
-        String recipientAcc = sc.nextLine();
-        File recipientFile = new File("./ACCOUNTS/" + recipientAcc + "/Balance.csv");
+        String recipientAcc = sc.nextLine().trim();
+        // Validate account number: allow only alphanumeric characters
+        if (!recipientAcc.matches("[A-Za-z0-9]+")) {
+            System.out.println("Invalid account number.");
+            sc.close();
+            return;
+        }
+        // Resolve path safely within the ACCOUNTS directory
+        java.nio.file.Path baseDir = java.nio.file.Paths.get("./ACCOUNTS").toAbsolutePath().normalize();
+        java.nio.file.Path recipientPath = baseDir.resolve(recipientAcc).resolve("Balance.csv").normalize();
+        if (!recipientPath.startsWith(baseDir)) {
+            System.out.println("Invalid account path.");
+            sc.close();
+            return;
+        }
+        File recipientFile = recipientPath.toFile();
         if (!recipientFile.exists()) {
             System.out.println("Recipient account not found.");
             sc.close();
