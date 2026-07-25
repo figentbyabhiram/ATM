@@ -10,10 +10,17 @@ public class User {
         acc = sc.nextLine();  
         System.out.println("Enter password: ");
         pass = sc.nextLine();  
-        sc.close();
+        // Do not close scanner to keep System.in open
         String line = "";
-        File f1 = new File("./ACCOUNTS/" + acc + "/Details.csv");
-        File f2 = new File("./PASSWORDS/" + acc + "/Pass.csv");
+        // Validate account identifier (digits only) to prevent path traversal
+        if (!acc.matches("\\d+")) {
+            System.err.println("Invalid account number.");
+            return false;
+        }
+        java.nio.file.Path f1Path = java.nio.file.Paths.get("ACCOUNTS", acc, "Details.csv");
+        java.nio.file.Path f2Path = java.nio.file.Paths.get("PASSWORDS", acc, "Pass.csv");
+        File f1 = f1Path.toFile();
+        File f2 = f2Path.toFile();
 
         if (f2.exists()) {
             Scanner scanner = new Scanner(f2);
